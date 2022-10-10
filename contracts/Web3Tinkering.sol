@@ -10,15 +10,37 @@ contract Web3Tinkering {
    event UpdatedMessages(string oldStr, string newStr);
 
    string public message;
+   string public firstName = 'I am a placeholder for firstName value';
+   string public lastName = 'I am a placeholder for lastName value';
     
     constructor(string memory initMessage) {
 
      message = initMessage;
    }
 
+   struct MyData {
+        string[] firstName;
+        string[] lastname;
+    }
+
+    MyData[] myInfo;
+
    function update(string memory newMessage) public {
       string memory oldMsg = message;
       message = newMessage;
       emit UpdatedMessages(oldMsg, newMessage);
    }
+
+   function getMessage(string memory _name) public pure {
+    _name = 'My Name is Jaylan';
+   }
+
+   function setMyInfo(string[] memory _firstName, string[] memory _lastName) public {
+        myInfo.push(MyData(_firstName, _lastName));
+    }
+
+   function getMyInfo() public view returns (MyData[] memory){
+        return myInfo;
+    }
+
 }
